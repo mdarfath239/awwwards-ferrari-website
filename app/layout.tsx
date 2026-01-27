@@ -11,6 +11,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Ferrari F1 - Engineering Speed",
   description: "A cinematic scrollytelling experience inspired by Ferrari F1 engineering.",
+  icons: {
+    icon: "/ferrari-Logo.png",
+    shortcut: "/ferrari-Logo.png",
+    apple: "/ferrari-Logo.png",
+  },
 };
 
 export default function RootLayout({

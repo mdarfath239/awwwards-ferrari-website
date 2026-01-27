@@ -1,12 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
-import { Download, MessageSquare } from "lucide-react";
 
 export default function Navbar() {
-    const [visible] = useState(true);
+    const { scrollY } = useScroll();
+    const [visible, setVisible] = useState(true);
+
+    // Hide navbar after scrolling past hero section (100vh)
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        if (latest > window.innerHeight * 0.15) {
+            setVisible(false);
+        } else {
+            setVisible(true);
+        }
+    });
 
     return (
         <motion.nav
@@ -15,8 +24,9 @@ export default function Navbar() {
                 opacity: visible ? 1 : 0,
                 y: visible ? 0 : -20
             }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed top-6 left-18 right-14 z-50 px-8 flex items-center justify-between"
+            style={{ pointerEvents: visible ? 'auto' : 'none' }}
         >
             {/* Left - Ferrari Logo (Separate) */}
             <div className="pointer-events-auto">
@@ -36,18 +46,13 @@ export default function Navbar() {
                     Dashboard
                 </Link>
 
-                <Link href="#" className="text-white/70 hover:text-white transition-colors text-sm font-medium flex items-center gap-1">
+             <Link href="#" className="text-white/70 hover:text-white transition-colors text-sm font-medium">
                     Orders
-                    <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
                 </Link>
 
                 <Link href="#" className="text-white/70 hover:text-white transition-colors text-sm font-medium">
                     Products
                 </Link>
-
-               
-
-            
 
                 {/* Search Icon */}
                 <button className="text-white/70 hover:text-white transition-colors">

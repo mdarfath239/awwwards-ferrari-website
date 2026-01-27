@@ -61,25 +61,31 @@ export default function FerrariCanvas() {
         const img = images[index];
         const width = window.innerWidth;
         const height = window.innerHeight;
+        const currentDpr = window.devicePixelRatio || 1;
 
-        // Handle resizing
-        if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            ctx.scale(dpr, dpr);
+        // Handle resizing - set canvas dimensions to match display size * DPR
+        if (canvas.width !== width * currentDpr || canvas.height !== height * currentDpr) {
+            canvas.width = width * currentDpr;
+            canvas.height = height * currentDpr;
+            // Set display size via CSS
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
         }
 
-        // Draw Main Car
+        // Reset transform and scale for DPR
+        ctx.setTransform(currentDpr, 0, 0, currentDpr, 0, 0);
+
+        // Clear canvas
         ctx.clearRect(0, 0, width, height);
 
         // Calculate scale to COVER the screen (Math.max)
-        // This removes any black/empty bars on the sides by ensuring the image fills the viewport.
         const scale = Math.max(width / img.width, height / img.height);
         const x = (width - img.width * scale) / 2;
         const y = (height - img.height * scale) / 2;
 
-        // Disable smoothing for sharper rendering
-        ctx.imageSmoothingEnabled = false;
+        // Enable high-quality image smoothing for upscaled images
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
 
@@ -147,10 +153,14 @@ export default function FerrariCanvas() {
     return (
         <div ref={containerRef} className="h-[500vh] w-full relative z-10">
             <div className="sticky top-0 h-screen w-full overflow-hidden">
-                {/* Main Layer: Sharp Canvas */}
+                {/* Main Layer: Canvas with sharpening CSS */}
                 <canvas
                     ref={canvasRef}
                     className="absolute inset-0 w-full h-full object-cover"
+                    style={{
+                        filter: 'contrast(1.15) brightness(1.02) saturate(1.15)',
+                        imageRendering: 'crisp-edges'
+                    }}
                 />
             </div>
         </div>
