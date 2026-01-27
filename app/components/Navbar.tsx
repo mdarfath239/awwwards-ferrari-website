@@ -1,14 +1,12 @@
 "use client";
 
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
+import { Download, MessageSquare } from "lucide-react";
 
 export default function Navbar() {
-    const { scrollY } = useScroll();
-    const [visible, setVisible] = useState(true);
-
-    /* Removed scroll hide logic to keep navbar visible in Hero per request */
+    const [visible] = useState(true);
 
     return (
         <motion.nav
@@ -18,22 +16,59 @@ export default function Navbar() {
                 y: visible ? 0 : -20
             }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
+            className="fixed top-6 left-18 right-14 z-50 px-8 flex items-center justify-between"
         >
-            <div className="pointer-events-auto bg-[#0a0a0ae6] backdrop-blur-md border border-white/10 rounded-full px-8 py-3 flex items-center gap-10 shadow-2xl">
-                <span className="font-bold tracking-tight text-white text-lg">Ferrari F1</span>
+            {/* Left - Ferrari Logo (Separate) */}
+            <div className="pointer-events-auto">
+                <img
+                    src="/logo.png"
+                    alt="Ferrari Logo"
+                    className="h-18 w-auto object-contain"
+                    style={{ mixBlendMode: 'multiply' }}
+                />
+            </div>
 
-                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
-                    <Link href="#" className="hover:text-red-500 transition-colors">Overview</Link>
-                    <Link href="#" className="hover:text-red-500 transition-colors">Aerodynamics</Link>
-                    <Link href="#" className="hover:text-red-500 transition-colors">Power Unit</Link>
-                    <Link href="#" className="hover:text-red-500 transition-colors">Chassis</Link>
-                    <Link href="#" className="hover:text-red-500 transition-colors">Specs</Link>
+            {/* Right - Menu Container */}
+            <div className="pointer-events-auto flex items-center gap-8">
+
+                {/* Navigation Links */}
+                <Link href="#" className="text-white font-semibold text-sm hover:text-white/80 transition-colors">
+                    Dashboard
+                </Link>
+
+                <Link href="#" className="text-white/70 hover:text-white transition-colors text-sm font-medium flex items-center gap-1">
+                    Orders
+                    <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                </Link>
+
+                <Link href="#" className="text-white/70 hover:text-white transition-colors text-sm font-medium">
+                    Products
+                </Link>
+
+               
+
+            
+
+                {/* Search Icon */}
+                <button className="text-white/70 hover:text-white transition-colors">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+
+                {/* Profile Avatar */}
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center overflow-hidden">
+                    <img src="/ferrari-logo.png" alt="Profile" className="w-full h-full object-cover" />
                 </div>
 
-                <button className="bg-transparent text-white text-xs font-bold uppercase tracking-wider px-5 py-2 rounded-full border border-red-500 hover:bg-red-600/20 hover:shadow-[0_0_20px_rgba(220,20,60,0.5)] transition-all">
-                    Discover Engineering
+                {/* Upgrade Button */}
+                <button className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white px-4 py-2 rounded-xl transition-colors flex items-center gap-2 text-sm font-medium border border-white/10">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Upgrade
                 </button>
+
             </div>
         </motion.nav>
     );

@@ -78,8 +78,8 @@ export default function FerrariCanvas() {
         const x = (width - img.width * scale) / 2;
         const y = (height - img.height * scale) / 2;
 
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
+        // Disable smoothing for sharper rendering
+        ctx.imageSmoothingEnabled = false;
         ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
 
@@ -124,30 +124,35 @@ export default function FerrariCanvas() {
 
     if (loadedCount < FRAME_COUNT) {
         return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#9e0e0e] text-white">
-                <div className="text-center">
-                    <p className="text-2xl font-bold mb-4 font-mono">INITIALIZING ENGINEERING DATA</p>
-                    <p className="text-sm opacity-70 font-mono">{(loadedCount / FRAME_COUNT * 100).toFixed(0)}%</p>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#FFCC00] text-black">
+                <div className="text-center flex flex-col items-center">
+                    {/* Ferrari Prancing Horse Logo */}
+                    <div className="mb-8 animate-pulse">
+                        <img
+                            src="/ferrari-logo.png"
+                            alt="Ferrari Logo"
+                            className="w-32 h-32 md:w-40 md:h-40 object-contain"
+                        />
+                    </div>
+                    {/* Loading Percentage */}
+                    <p className="text-4xl md:text-6xl font-bold font-mono tracking-wider">
+                        {(loadedCount / FRAME_COUNT * 100).toFixed(0)}%
+                    </p>
+                    <p className="text-xs md:text-sm opacity-60 mt-4 uppercase tracking-widest">Loading</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div ref={containerRef} className="h-[500vh] w-full relative">
-            <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#9e0e0e]">
-                {/* Main Layer: Sharp Contain with Filters */}
+        <div ref={containerRef} className="h-[500vh] w-full relative z-10">
+            <div className="sticky top-0 h-screen w-full overflow-hidden">
+                {/* Main Layer: Sharp Canvas */}
                 <canvas
                     ref={canvasRef}
                     className="absolute inset-0 w-full h-full object-cover"
-                    style={{
-                        // Contrast and brightness to fight blur
-                        // Drop shadow to lift it off the background
-                        filter: "contrast(1.2) brightness(1.1) saturate(1.1) drop-shadow(0 20px 50px rgba(0,0,0,0.5))"
-                    }}
                 />
             </div>
-            {/* SVG Filter Removed for Performance/Smoothness */}
         </div>
     );
 }

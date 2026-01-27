@@ -8,31 +8,60 @@ import { ArrowRight } from "lucide-react";
 export default function Home() {
   return (
     <main className="w-full bg-[#9e0e0e] text-white selection:bg-white selection:text-[#9e0e0e]">
-
+<Navbar/>
 
       <div className="relative">
+        {/* Canvas with car */}
         <FerrariCanvas />
 
         {/* Content Overlay - Absolute positioned over the 500vh container */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-10">
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-20">
 
-          {/* Section 1: Hero (0-15%) */}
-          <div className="absolute top-0 h-screen w-full flex items-end justify-center pb-32 overflow-hidden">
-            {/* Blurred Background F1-Style Text */}
-            <div className="absolute inset-0 flex items-end justify-center pb-32 pointer-events-none select-none z-0">
-              <h1 className="text-[20vw] md:text-[25vw] font-black italic tracking-tighter text-white/5 blur-sm md:blur-md uppercase leading-none scale-110">
-                FERRARI
+          {/* Section 1: Hero - Only visible in first screen */}
+          <div className="absolute top-0 h-screen w-full flex flex-col overflow-hidden">
+
+            {/* FERRARI Typography - Behind car in hero */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+              <h1 className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tight uppercase leading-none whitespace-nowrap text-white" style={{ fontFamily: "'Bungee Outline', cursive" }}>
+                <span>FE</span>
+                <span className="opacity-40">RR</span>
+                <span>ARI</span>
               </h1>
             </div>
 
-            <div className="relative z-10">
-              <TextSection align="center">
-                <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-4 uppercase drop-shadow-2xl">Fer<span className="text-white/60">rar</span>i<span className="text-white/40">F1</span></h1>
-                <p className="text-xl md:text-3xl font-light text-white/90 tracking-wide">Engineering speed at its absolute limit.</p>
-                <div className="w-24 h-1 bg-white/20 mt-8 mb-4"></div>
-                <p className="text-sm md:text-base text-red-200 uppercase tracking-[0.3em]">Precision · Aerodynamics · Power</p>
-              </TextSection>
+            {/* Specs Panel - Bottom Left */}
+            <div className="absolute bottom-24 left-8 md:left-16 z-20 pointer-events-auto">
+              <div className="space-y-2 font-mono text-xs md:text-sm uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60">Engine</span>
+                  <span className="text-white/30">:</span>
+                  <span className="text-white font-bold">V12</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60">Power</span>
+                  <span className="text-white/30">:</span>
+                  <span className="text-white font-bold">949HP</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60">0-100MPH</span>
+                  <span className="text-white/30">:</span>
+                  <span className="text-white font-bold">2.1S</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60">Top Speed</span>
+                  <span className="text-white/30">:</span>
+                  <span className="text-white font-bold">418 MPH</span>
+                </div>
+              </div>
             </div>
+
+            {/* Description Text - Bottom Center */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full max-w-3xl px-8 text-center">
+              <p className="text-white/70 text-xs md:text-sm leading-relaxed font-light italic">
+                Founded in 1939 by Enzo Ferrari (1898–1988), the company built its first car in 1940, adopted its current name in 1945, and began to produce its current line of road cars in 1947.
+              </p>
+            </div>
+
           </div>
 
           {/* Section 2: Engineering Reveal (15-40%) */}
