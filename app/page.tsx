@@ -98,19 +98,7 @@ export default function Home() {
             </TextSection>
           </div>
 
-          {/* Section 5: Finale (85-100%) */}
-          <div className="absolute top-[90%] w-full h-screen flex items-center justify-center">
-            <TextSection align="center">
-              <h2 className="text-5xl md:text-8xl font-bold mb-8 uppercase tracking-tighter">Born from <br />racing.</h2>
-              <button className="bg-white text-[#740A03] px-10 py-4 rounded-full font-bold text-lg tracking-wider hover:bg-gray-100 hover:scale-105 transition-all shadow-xl cursor-pointer pointer-events-auto">
-                Explore the Car
-              </button>
-              <div className="mt-8 flex gap-8 text-white/40 uppercase text-xs tracking-widest">
-                <span>View Specifications</span>
-                <span>Configurator</span>
-              </div>
-            </TextSection>
-          </div>
+
         </div>
       </div>
 
