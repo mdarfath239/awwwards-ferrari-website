@@ -191,7 +191,7 @@ This project is for demonstration purposes. Ferrari branding and imagery are use
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - **Ferrari** - For the iconic brand and inspiration
 - **Framer Motion** - For powerful animation capabilities
